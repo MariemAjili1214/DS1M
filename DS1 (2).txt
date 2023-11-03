@@ -1,0 +1,111 @@
+MARIEM AJILI ET MARAM NAES 2éme licence Systeme embarque et IOT
+
+Dans ce code là on va vue la prémiere phase: 
+REMARQUE: "RE" c'est une expression régulière on utilise "re.match" pour  vérifier si une chaîne commence par une correspondance avec l'expression régulière spécifiée  .
+
+/***************************************************
+import ds1
+import re
+while True:
+    print("1-Phase d'Enregistrement:")
+    print("2-Phase d'Authentification:")
+    choix=input("donnez votre choix")
+    if choix=='1':
+        email = input("Entrez votre email : ")
+        password = input("Entrez votre mot de passe : ")
+        if re.match(r"[^@]+@[^@]+\.[^@]+", email) and (len(pwd) == 8 and
+        any(c.isupper() for c in pwd) and
+        any(c.islower() for c in pwd) and
+        any(c.isdigit() for c in password) and
+        any(not c.isalnum() for c in pwd)):
+            ds1.enregistrer_utilisateur(email, pwd)
+            print("Utilisateur enregistré avec succès :).")
+        else:
+            print("Email ou mot de passe invalide :(.")
+
+    elif choix == "2":
+        email = input("Entrez votre email  svp: ")
+        password = input("Entrez votre mot de passe svp : ")
+        if ds1.authentifier_utilisateur(email, pwd):
+            print("Authentification réussie :).")
+            ds1.afficher_menu()
+        else:
+            print("Email ou mot de passe incorrect :(.")
+
+/************************************
+Dans ce code là la deuxieme phase :
+
+# Fonction  enregistrer un utilisateur dans Enregistrement.txt
+def enregistrer_utilisateur(email, pwd):
+    with open("Enregistrement.txt", "a") as fichier:
+        fichier.write(f"{email}:{pwd}\n")
+
+# Fonction vérifier
+def authentifier_utilisateur(email, pwd):
+    with open("Enregistrement.txt", "r") as fichier:
+        lignes = fichier.readlines()
+        for ligne in lignes:
+            stored_email, stored_pwd = ligne.strip().split(":")
+            if email == stored_email and pwd == stored_pwd:
+                return True
+        return False
+
+# Fonction afficher le menu principal
+def afficher_menu():
+    print("Menu Principal:")
+    print("A- Jouer à la Roulette")
+    print("B- Décalage par CESAR")
+    choix = input("Choisissez une option : ")
+    if choix == "A":
+        jouer_roulette()
+    elif choix == "B":
+        chiffrement_cesar()
+    else:
+        print("Option invalide :(")
+
+import random
+def jouer_roulette():
+    j = 100
+    print("Bienvenue à la table de roulette ! ")
+    while j > 0:
+        print(f"Vous avez actuellement {j} jetons.")
+        mise = int(input("Combien de jetons souhaitez-vous miser (0 pour quitter) ? "))
+        if mise == 0:
+            print("Merci d'avoir joué à la roulette. Au revoir !")
+            break
+        if mise > j:
+            print(" Réessayez svp.")
+            continue
+            
+        numero_choisi = int(input("Choisissez un numéro entre 0 et 36 sur lequel parier : "))
+        numero_gagnant = random.randint(0, 36)
+
+        print(f"La roulette s'arrête sur le numéro {numero_gagnant}.")
+        if numero_choisi == numero_gagnant:
+            g = mise * 36  
+            j += g
+            print(f" Vous avez gagné {g} jetons.:)")
+        else:
+            j -= mise
+            print("vous avez perdu votre mise.:(")
+
+    print("Vous êtes fauché. Merci d'avoir joué à la roulette!")
+
+
+
+# Fonction pour le chiffrement César
+def chiffrement_cesar():
+    M = input("Entrez le message à chiffrer : ")
+    dcl= int(input("Entrez le décalage ( oblig entier) : "))
+R = ""
+for c in M:
+    if c.isalpha():
+        N_char = chr(ord(c) + dcl)
+        R += N_char
+    else:
+        R += c
+
+print(f"Message chiffré : {R}")
+
+
+
